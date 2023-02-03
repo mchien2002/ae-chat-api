@@ -20,160 +20,160 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Long _id;
+    private Long id;
 
     @Column(name = "type")
-    private int _type;
+    private int type;
 
     @Column(name = "status")
-    private int _status;
+    private int status;
 
     @Column(name = "groupType")
-    private int _groupType;
+    private int groupType;
 
     @Column(name = "groupId")
-    private Long _groupId;
+    private Long groupId;
 
     @Column(name = "message")
-    private String _message;
+    private String message;
 
     @Column(name = "createdAt")
-    private Date _createdAt;
+    private Date createdAt;
 
     @Column(name = "updateAt")
-    private Date _updateAt;
+    private Date updateAt;
 
     @Column(name = "senderName")
-    private String _senderName;
+    private String senderName;
 
     @Column(name = "senderUin")
-    private String _senderUin;
+    private String senderUin;
 
     @Column(name = "senderAvatar")
-    private String _senderAvatar;
+    private String senderAvatar;
 
     @Column(name = "nonce")
-    private String _nonce;
+    private String nonce;
 
     @Transient
-    private List<String> _seenUins;
+    private List<String> seenUins;
 
     @Transient
-    private List<String> _deletedUins;
+    private List<String> deletedUins;
 
     @Transient
     private Object attachments;
 
     public Long get_id() {
-        return _id;
+        return id;
     }
 
     public void set_id(Long _id) {
-        this._id = _id;
+        this.id = _id;
     }
 
-    public int get_type() {
-        return _type;
+    public int getType() {
+        return type;
     }
 
-    public void set_type(int _type) {
-        this._type = _type;
+    public void setType(int _type) {
+        this.type = _type;
     }
 
-    public int get_status() {
-        return _status;
+    public int getStatus() {
+        return status;
     }
 
-    public void set_status(int _status) {
-        this._status = _status;
+    public void setStatus(int _status) {
+        this.status = _status;
     }
 
-    public int get_groupType() {
-        return _groupType;
+    public int getGroupType() {
+        return groupType;
     }
 
-    public void set_groupType(int _groupType) {
-        this._groupType = _groupType;
+    public void setGroupType(int _groupType) {
+        this.groupType = _groupType;
     }
 
-    public Long get_groupId() {
-        return _groupId;
+    public Long getGroupId() {
+        return groupId;
     }
 
-    public void set_groupId(Long _groupId) {
-        this._groupId = _groupId;
+    public void setGroupId(Long _groupId) {
+        this.groupId = _groupId;
     }
 
-    public String get_message() {
-        return _message;
+    public String getMessage() {
+        return message;
     }
 
-    public void set_message(String _message) {
-        this._message = _message;
+    public void setMessage(String _message) {
+        this.message = _message;
     }
 
-    public Date get_createdAt() {
-        return _createdAt;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void set_createdAt(Date _createdAt) {
-        this._createdAt = _createdAt;
+    public void setCreatedAt(Date _createdAt) {
+        this.createdAt = _createdAt;
     }
 
-    public Date get_updateAt() {
-        return _updateAt;
+    public Date getUpdateAt() {
+        return updateAt;
     }
 
-    public void set_updateAt(Date _updateAt) {
-        this._updateAt = _updateAt;
+    public void setUpdateAt(Date _updateAt) {
+        this.updateAt = _updateAt;
     }
 
-    public String get_senderName() {
-        return _senderName;
+    public String getSenderName() {
+        return senderName;
     }
 
-    public void set_senderName(String _senderName) {
-        this._senderName = _senderName;
+    public void setSenderName(String _senderName) {
+        this.senderName = _senderName;
     }
 
-    public String get_senderUin() {
-        return _senderUin;
+    public String getSenderUin() {
+        return senderUin;
     }
 
-    public void set_senderUin(String _senderUin) {
-        this._senderUin = _senderUin;
+    public void setSenderUin(String _senderUin) {
+        this.senderUin = _senderUin;
     }
 
-    public String get_senderAvatar() {
-        return _senderAvatar;
+    public String getSenderAvatar() {
+        return senderAvatar;
     }
 
-    public void set_senderAvatar(String _senderAvatar) {
-        this._senderAvatar = _senderAvatar;
+    public void setSenderAvatar(String _senderAvatar) {
+        this.senderAvatar = _senderAvatar;
     }
 
-    public String get_nonce() {
-        return _nonce;
+    public String getNonce() {
+        return nonce;
     }
 
-    public void set_nonce(String _nonce) {
-        this._nonce = _nonce;
+    public void setNonce(String _nonce) {
+        this.nonce = _nonce;
     }
 
-    public List<String> get_seenUins() {
-        return _seenUins;
+    public List<String> getSeenUins() {
+        return seenUins;
     }
 
-    public void set_seenUins(List<String> _seenUins) {
-        this._seenUins = _seenUins;
+    public void setSeenUins(List<String> _seenUins) {
+        this.seenUins = _seenUins;
     }
 
-    public List<String> get_deletedUins() {
-        return _deletedUins;
+    public List<String> getDeletedUins() {
+        return deletedUins;
     }
 
-    public void set_deletedUins(List<String> _deletedUins) {
-        this._deletedUins = _deletedUins;
+    public void setDeletedUins(List<String> _deletedUins) {
+        this.deletedUins = _deletedUins;
     }
 
     public Object getAttachments() {

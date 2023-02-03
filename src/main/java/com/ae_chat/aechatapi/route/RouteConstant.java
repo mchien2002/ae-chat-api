@@ -11,4 +11,8 @@ public class RouteConstant {
     static public final String MESSAGE = "/message";
     static public final String RETURN_TOPIC = "/topic/return-to";
     static public final String MOBILE_NUMBER = "/mobileNo";
+    static public final String REGISTER_MOBILE = "/register_by_mobileNo";
+    static public final String VERIFY_OTP_MOBILE = "/verifyOTP_mobileNo";
+    static public final String REGISTER_EMAIL = "/register_by_email";
+    static public final String VERIFY_OTP_EMAIL = "/verifyOTP_email";
 }
