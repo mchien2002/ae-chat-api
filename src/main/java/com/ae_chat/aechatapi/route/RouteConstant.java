@@ -15,4 +15,6 @@ public class RouteConstant {
     static public final String VERIFY_OTP_MOBILE = "/verifyOTP_mobileNo";
     static public final String REGISTER_EMAIL = "/register_by_email";
     static public final String VERIFY_OTP_EMAIL = "/verifyOTP_email";
+    static public final String CREATE_GROUP = "/create_group";
+    static public final String USER_PROFILE = "/user_profile";
 }

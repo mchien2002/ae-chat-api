@@ -1,6 +1,10 @@
 package com.ae_chat.aechatapi.service.register;
 
+
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -12,7 +16,10 @@ import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class RegisterServiceIml implements RegisterService {
     @Autowired
     private UserReponsitory userReponsitory;
@@ -64,7 +71,7 @@ public class RegisterServiceIml implements RegisterService {
             newUser.setEmail(email);
             newUser.setOtp(Integer.toString(otp));
             saveByEmail(newUser);
-        } catch (Exception e) {
+        } catch (MailException e) {
             throw e;
         }
     }
@@ -72,11 +79,10 @@ public class RegisterServiceIml implements RegisterService {
     @Override
     public User verifyOTPMail(String email, String otp) {
         User user = userReponsitory.findByEmail(email);
-        
         if (user.getOtp().equals(otp)) {
+            userReponsitory.updateOTPByMail(null, email);
             return user;
         }
-        System.out.print(user.getOtp());
         return null;
     }
 
@@ -84,16 +90,16 @@ public class RegisterServiceIml implements RegisterService {
         try {
             userReponsitory.updateOTP(user.getOtp().toString(), user.getPhone());
         } catch (Exception e) {
-            user.setState(0);
             userReponsitory.save(user);
         }
     }
 
     public void saveByEmail(User user) {
         try {
-            user.setState(0);
+            user.setCreatedAt(new Date());
             userReponsitory.save(user);
         } catch (Exception e) {
+            log.error(e.toString());
             userReponsitory.updateOTPByMail(user.getOtp().toString(), user.getEmail());
         }
     }

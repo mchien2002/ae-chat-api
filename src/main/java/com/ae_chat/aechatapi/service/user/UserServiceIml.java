@@ -1,4 +1,4 @@
-package com.ae_chat.aechatapi.service.register;
+package com.ae_chat.aechatapi.service.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,6 +45,20 @@ public class UserServiceIml implements UserService {
     public void deleteUserByPhone(String phone) {
         // TODO Auto-generated method stub
 
+    }
+
+    public UserReponsitory getUserReponsitory() {
+        return userReponsitory;
+    }
+
+    public void setUserReponsitory(UserReponsitory userReponsitory) {
+        this.userReponsitory = userReponsitory;
+    }
+
+    @Override
+    public User findUserByID(Long id) {
+        User user = userReponsitory.findUserById(id);
+        return user;
     }
 
 }

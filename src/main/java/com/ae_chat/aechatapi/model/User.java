@@ -7,26 +7,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.ae_chat.aechatapi.util.FormatString;
-
-// STATE:
-//     0: Not authorized
-//     1: Authorized
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
-    @Column(name = "userName")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
+    private Long userId;
+    @Column(name = "user_name")
     private String userName;
 
-
-    @Column(name = "fullName")
+    @Column(name = "full_name")
     private String fullName;
 
     @Column(name = "phone")
@@ -38,19 +37,30 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "localName")
+    @Column(name = "local_name")
     private String localName;
 
-    @Column(name = "createdAt")
+    @Column(name = "created_at")
     private Date createdAt;
-
-    @Column(name = "state")
-    private int state;
 
     @Column(name = "otp")
     private String otp;
 
+    @ManyToOne
+    @JoinColumn(name = "group_id", nullable = true, referencedColumnName = "group_id")
+    @JsonBackReference
+    private Group memberOfGroup;
+
+    @Transient
     private String token;
+
+    public Group getMemberOfGroup() {
+        return memberOfGroup;
+    }
+
+    public void setMemberOfGroup(Group memberOfGroup) {
+        this.memberOfGroup = memberOfGroup;
+    }
 
     public String getOtp() {
         return otp;
@@ -58,14 +68,6 @@ public class User {
 
     public void setOtp(String _otp) {
         this.otp = _otp;
-    }
-
-    public int getState() {
-        return state;
-    }
-
-    public void setState(int _state) {
-        this.state = _state;
     }
 
     public Date getCreatedAt() {
@@ -77,11 +79,11 @@ public class User {
     }
 
     public Long getId() {
-        return id;
+        return userId;
     }
 
     public void setId(Long _id) {
-        this.id = _id;
+        this.userId = _id;
     }
 
     public String getUserName() {

@@ -1,14 +1,14 @@
 package com.ae_chat.aechatapi.helper;
 
-public class Response {
+public class IncredibleResponse {
     private Boolean status;
     private String message;
     private Object error;
     private Object data;
-    public Response(Boolean _status, String _message, Object _error, Object _data) {
+    public IncredibleResponse(Boolean _status, String _message, Object _error, Object _data) {
         this.status = _status;
         this.message = _message;
-        this.error = _error;
+        this.error = _error;    
         this.data = _data;
     }
     public Boolean getStatus() {

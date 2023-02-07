@@ -1,4 +1,4 @@
-package com.ae_chat.aechatapi.service.register;
+package com.ae_chat.aechatapi.service.user;
 
 import com.ae_chat.aechatapi.model.User;
 
@@ -9,4 +9,5 @@ public interface UserService {
     void registerNewUser(User user);
     void updateUserProfile(User user);
     void deleteUserByPhone(String phone);
+    User findUserByID(Long id);
 }

@@ -1,6 +1,5 @@
 package com.ae_chat.aechatapi.repositories;
 
-import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -22,4 +21,8 @@ public interface UserReponsitory extends JpaRepository<User, Long> {
     @Modifying
     @Query(value = "UPDATE `aechat-db`.users SET otp = :otp WHERE email = :email", nativeQuery = true)
     void updateOTPByMail(@Param("otp") String otp, @Param("email") String email);
+
+    @Transactional
+    @Query(value = "SELECT * FROM users WHERE user_id = :id", nativeQuery = true)    
+    User findUserById(@Param("id") Long id);
 }
