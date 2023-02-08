@@ -3,14 +3,14 @@ package com.ae_chat.aechatapi.service.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ae_chat.aechatapi.model.User;
-import com.ae_chat.aechatapi.repositories.UserReponsitory;
+import com.ae_chat.aechatapi.entity.User;
+import com.ae_chat.aechatapi.repositories.UserRepository;
 
 @Service
 public class UserServiceIml implements UserService {
 
     @Autowired
-    private UserReponsitory userReponsitory;
+    private UserRepository userReponsitory;
 
     @Override
     public User findUserByPhone(String phone) {
@@ -47,11 +47,11 @@ public class UserServiceIml implements UserService {
 
     }
 
-    public UserReponsitory getUserReponsitory() {
+    public UserRepository getUserReponsitory() {
         return userReponsitory;
     }
 
-    public void setUserReponsitory(UserReponsitory userReponsitory) {
+    public void setUserReponsitory(UserRepository userReponsitory) {
         this.userReponsitory = userReponsitory;
     }
 

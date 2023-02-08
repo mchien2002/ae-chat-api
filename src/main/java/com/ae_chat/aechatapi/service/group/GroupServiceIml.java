@@ -1,25 +1,32 @@
 package com.ae_chat.aechatapi.service.group;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ae_chat.aechatapi.model.Group;
-import com.ae_chat.aechatapi.model.User;
-import com.ae_chat.aechatapi.repositories.GroupReponsitory;
+import com.ae_chat.aechatapi.entity.GroupConversation;
+import com.ae_chat.aechatapi.repositories.GroupRepository;
+import com.ae_chat.aechatapi.repositories.MemberOfGroupRepository;
 
 @Service
 public class GroupServiceIml implements GroupService {
+
     @Autowired
-    private GroupReponsitory groupReponsitory;
+    private GroupRepository groupReponsitory;
+    @Autowired
+    private MemberOfGroupRepository memberOfGroupRepository;
+
     @Override
-    public List<Group> getListGroupOfUser(User user) {
-        return null;
-    }
-    @Override
-    public void createGroup(Group group) {
-        groupReponsitory.save(group);
+    public void createGroup(GroupConversation group) {
+        groupReponsitory.saveAndFlush(group);
+        for (Long item : group.getMembers()) {
+            groupReponsitory.addMemberToGroup(group.getGroupId(), item);
+        }
     }
 
+    @Override
+    public GroupConversation getGroupById(Long id) {
+        GroupConversation group = groupReponsitory.findById(id).get();
+        group.setMembers(memberOfGroupRepository.getMemberByGroupId(group.getGroupId()));
+        return group;
+    }
 }

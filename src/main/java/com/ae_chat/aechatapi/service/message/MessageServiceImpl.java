@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ae_chat.aechatapi.model.Message;
+import com.ae_chat.aechatapi.entity.Message;
 import com.ae_chat.aechatapi.repositories.MessageRepository;
 
 @Service

@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ae_chat.aechatapi.entity.User;
 import com.ae_chat.aechatapi.helper.IncredibleResponse;
-import com.ae_chat.aechatapi.model.User;
 import com.ae_chat.aechatapi.route.RouteConstant;
 import com.ae_chat.aechatapi.service.register.JwtService;
 import com.ae_chat.aechatapi.service.register.RegisterService;

@@ -9,8 +9,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import com.ae_chat.aechatapi.model.User;
-import com.ae_chat.aechatapi.repositories.UserReponsitory;
+import com.ae_chat.aechatapi.entity.User;
+import com.ae_chat.aechatapi.repositories.UserRepository;
 import com.ae_chat.aechatapi.util.FormatString;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RegisterServiceIml implements RegisterService {
     @Autowired
-    private UserReponsitory userReponsitory;
+    private UserRepository userReponsitory;
     @Autowired
     private JavaMailSender javaMailSender;
     static final String Account_Sid = "ACdfb0d069b551c3bb92541b4d7536ea92";

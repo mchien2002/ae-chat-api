@@ -1,4 +1,4 @@
-package com.ae_chat.aechatapi.model;
+package com.ae_chat.aechatapi.entity;
 
 public class UserRegister {
     private String _phonel;

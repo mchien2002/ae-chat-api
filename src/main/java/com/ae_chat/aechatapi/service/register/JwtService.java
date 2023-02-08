@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import com.ae_chat.aechatapi.model.User;
+import com.ae_chat.aechatapi.entity.User;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -40,7 +40,7 @@ public class JwtService {
 
     public String generateToken(User user) {
         Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, user.getId().toString());
+        return createToken(claims, user.getUserId().toString());
     }
 
     private String createToken(Map<String, Object> claims, String subject) {

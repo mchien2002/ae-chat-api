@@ -1,4 +1,4 @@
-package com.ae_chat.aechatapi.model;
+package com.ae_chat.aechatapi.entity;
 
 import java.util.Date;
 import java.util.List;

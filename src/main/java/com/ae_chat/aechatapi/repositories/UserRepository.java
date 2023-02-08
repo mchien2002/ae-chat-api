@@ -7,9 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ae_chat.aechatapi.model.User;
+import com.ae_chat.aechatapi.entity.User;
 
-public interface UserReponsitory extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
     User findByPhone(String phone);
     User findByEmail(String email);
     @Transactional
