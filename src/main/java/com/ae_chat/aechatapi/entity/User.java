@@ -121,4 +121,14 @@ public class User {
         this.token = token;
     }
 
+    public User setFirstRegisterByMail(String email, String otp){
+        var newUser = new User();
+        newUser.setEmail(email);
+        newUser.setOtp(otp);
+        newUser.setCreatedAt(new Date());
+        newUser.setFullName(email);
+        newUser.setLocalName(email);
+        newUser.setUserName(email);
+        return newUser;
+    }
 }

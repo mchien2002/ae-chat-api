@@ -67,9 +67,7 @@ public class RegisterServiceIml implements RegisterService {
             simpleMailMessage.setSubject("AppChat - Verify your email");
             simpleMailMessage.setText("Mã OTP của bạn là: " + Integer.toString(otp) + ". Xin hãy xác minh");
             javaMailSender.send(simpleMailMessage);
-            User newUser = new User();
-            newUser.setEmail(email);
-            newUser.setOtp(Integer.toString(otp));
+            User newUser = new User().setFirstRegisterByMail(email, Integer.toString(otp));
             saveByEmail(newUser);
         } catch (MailException e) {
             throw e;
@@ -96,7 +94,6 @@ public class RegisterServiceIml implements RegisterService {
 
     public void saveByEmail(User user) {
         try {
-            user.setCreatedAt(new Date());
             userReponsitory.save(user);
         } catch (Exception e) {
             log.error(e.toString());

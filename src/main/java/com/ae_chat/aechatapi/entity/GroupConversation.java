@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.persistence.*;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -40,4 +39,11 @@ public class GroupConversation {
 
     @Transient
     private List<Long> members;
+
+    @Transient
+    private List<?> removedMember;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "last_message", referencedColumnName = "message_id", nullable = true)
+    private Message lastMessage;
 }

@@ -3,23 +3,22 @@ package com.ae_chat.aechatapi.entity;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
+import com.ae_chat.aechatapi.entity.enum_model.MessageStatus;
+import com.ae_chat.aechatapi.entity.enum_model.MessageType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.*;
 
 @Entity
 @Table(name = "messages")
+@Getter
+@Setter
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "message_id")
     private Long id;
 
     @Column(name = "type")
@@ -28,28 +27,28 @@ public class Message {
     @Column(name = "status")
     private int status;
 
-    @Column(name = "groupType")
+    @Column(name = "group_type")
     private int groupType;
 
-    @Column(name = "groupId")
+    @Column(name = "group_id")
     private Long groupId;
 
     @Column(name = "message")
     private String message;
 
-    @Column(name = "createdAt")
+    @Column(name = "created_at")
     private Date createdAt;
 
-    @Column(name = "updateAt")
+    @Column(name = "update_at")
     private Date updateAt;
 
-    @Column(name = "senderName")
+    @Column(name = "sender_name")
     private String senderName;
 
-    @Column(name = "senderUin")
-    private String senderUin;
+    @Column(name = "sender_uin")
+    private Long senderUin;
 
-    @Column(name = "senderAvatar")
+    @Column(name = "sender_avatar")
     private String senderAvatar;
 
     @Column(name = "nonce")
@@ -64,163 +63,18 @@ public class Message {
     @Transient
     private Object attachments;
 
-    public Long get_id() {
-        return id;
-    }
+    @OneToOne(mappedBy = "lastMessage")
+    @JsonBackReference
+    private GroupConversation groupConversation;
 
-    public void set_id(Long _id) {
-        this.id = _id;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int _type) {
-        this.type = _type;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int _status) {
-        this.status = _status;
-    }
-
-    public int getGroupType() {
-        return groupType;
-    }
-
-    public void setGroupType(int _groupType) {
-        this.groupType = _groupType;
-    }
-
-    public Long getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(Long _groupId) {
-        this.groupId = _groupId;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String _message) {
-        this.message = _message;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date _createdAt) {
-        this.createdAt = _createdAt;
-    }
-
-    public Date getUpdateAt() {
-        return updateAt;
-    }
-
-    public void setUpdateAt(Date _updateAt) {
-        this.updateAt = _updateAt;
-    }
-
-    public String getSenderName() {
-        return senderName;
-    }
-
-    public void setSenderName(String _senderName) {
-        this.senderName = _senderName;
-    }
-
-    public String getSenderUin() {
-        return senderUin;
-    }
-
-    public void setSenderUin(String _senderUin) {
-        this.senderUin = _senderUin;
-    }
-
-    public String getSenderAvatar() {
-        return senderAvatar;
-    }
-
-    public void setSenderAvatar(String _senderAvatar) {
-        this.senderAvatar = _senderAvatar;
-    }
-
-    public String getNonce() {
-        return nonce;
-    }
-
-    public void setNonce(String _nonce) {
-        this.nonce = _nonce;
-    }
-
-    public List<String> getSeenUins() {
-        return seenUins;
-    }
-
-    public void setSeenUins(List<String> _seenUins) {
-        this.seenUins = _seenUins;
-    }
-
-    public List<String> getDeletedUins() {
-        return deletedUins;
-    }
-
-    public void setDeletedUins(List<String> _deletedUins) {
-        this.deletedUins = _deletedUins;
-    }
-
-    public Object getAttachments() {
-        return attachments;
-    }
-
-    public void setAttachments(Object attachments) {
-        this.attachments = attachments;
+    public Message createFirstMessage(Long senderUin, int groupType){
+        var firstMessage = new Message();
+        firstMessage.setCreatedAt(new Date());
+        firstMessage.setType(MessageType.firstMessage.ordinal());
+        firstMessage.setMessage("");
+        firstMessage.setGroupType(groupType);
+        firstMessage.setSenderUin(senderUin);
+        firstMessage.setStatus(MessageStatus.sent.ordinal());
+        return firstMessage;
     }
 }
-
-/**
- * MessageType
- * text: 0
- * call: 1
- * image: 2
- * audio: 3
- * video: 4
- * firstMessage: 5
- * groupUpdate: 6
- * leaveGroup: 7
- * rely: 8
- * forward: 9
- * sticker: 10
- * file: 12
- * screenshot: 13
- * location: 14
- * liveLocation: 15
- * groupCall: 16
- */
-
-/*
- * MessageStatus
- * unknown: 0
- * sent: 1
- * received: 2
- * seen: 3
- * deleted: 4
- * sending: 5
- */
-
-/**
- * GroupType
- * unknown: 0
- * private: 1
- * group: 2
- * public: 3
- * channel: 4
- * official: 5
- */

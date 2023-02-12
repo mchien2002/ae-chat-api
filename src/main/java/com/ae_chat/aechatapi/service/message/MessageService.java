@@ -6,6 +6,6 @@ import com.ae_chat.aechatapi.entity.Message;
 
 public interface MessageService {
     Message getMessageDetail(String messageID);
-
+    void saveMessage(Message mess);
     List<Message> getMessagesByGroupID(String groupID);
 }

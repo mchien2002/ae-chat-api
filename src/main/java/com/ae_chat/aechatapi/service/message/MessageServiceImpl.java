@@ -23,4 +23,9 @@ public class MessageServiceImpl implements MessageService {
         return messageRepository.findAll();
     }
 
+    @Override
+    public void saveMessage(Message mess) {
+        messageRepository.saveAndFlush(mess);
+    }
+
 }
