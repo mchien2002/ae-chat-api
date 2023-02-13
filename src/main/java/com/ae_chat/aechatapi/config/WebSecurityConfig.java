@@ -26,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeHttpRequests()
                 .antMatchers(RouteConstant.VERIFY_OTP_EMAIL, RouteConstant.REGISTER_EMAIL,
-                        RouteConstant.VERIFY_OTP_MOBILE, RouteConstant.REGISTER_MOBILE, "/", "/registration/{userName}", "/chat/**")
+                        RouteConstant.VERIFY_OTP_MOBILE, RouteConstant.REGISTER_MOBILE, "/")
                 .permitAll().anyRequest().authenticated().and().exceptionHandling().and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
