@@ -17,6 +17,10 @@ public interface GroupRepository extends JpaRepository<GroupConversation, Long> 
     void addMemberToGroup(@Param("groupId") Long groupId, @Param("userId") Long userId);
 
     @Transactional
-    @Query(value = "SELECT * FROM `aechat-db`.groups WHERE group_id = :groupId", nativeQuery = true)
+    @Query(value = "SELECT * FROM `aechat-db`.group_conversation WHERE group_id = :groupId", nativeQuery = true)
     GroupConversation findGroupById(@Param("groupId") Long groupId);
+
+    @Transactional
+    @Query(value = "SELECT * FROM `aechat-db`.group_conversation JOIN `aechat-db`.member_of_group ON member_of_group.user_id = :userId WHERE  group_conversation.group_id = member_of_group.group_id", nativeQuery = true)
+    List<GroupConversation> getListGroupOfMember(@Param("userId") Long userId);
 }

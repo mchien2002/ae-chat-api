@@ -15,7 +15,7 @@ import com.ae_chat.aechatapi.route.RouteConstant;
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint(RouteConstant.CHAT_SOCKET).setAllowedOriginPatterns("*").withSockJS();
+        registry.addEndpoint(RouteConstant.CONNECT_SOCKET_ENDPOINT).setAllowedOriginPatterns("*").withSockJS();
     }
 
     @Override

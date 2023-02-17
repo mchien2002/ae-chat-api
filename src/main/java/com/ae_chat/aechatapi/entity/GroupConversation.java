@@ -13,7 +13,7 @@ import lombok.Setter;
 @Table(name = "group_conversation")
 @Getter
 @Setter
-public class GroupConversation {
+public class GroupConversation implements Comparable<GroupConversation> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "group_id")
@@ -46,4 +46,9 @@ public class GroupConversation {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "last_message", referencedColumnName = "message_id", nullable = true)
     private Message lastMessage;
+
+    @Override
+    public int compareTo(GroupConversation gr) {
+        return lastMessage.getCreatedAt().compareTo(gr.lastMessage.getCreatedAt());
+    }
 }

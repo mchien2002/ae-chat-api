@@ -59,7 +59,7 @@ public class RegisterServiceIml implements RegisterService {
 
     @Override
     public void genrateOTPAndSendOnEmail(String email) {
-        int otp = (int) (Math.random() * 9000) + 1000;
+        int otp = (int) (Math.random() * 900000) + 100000;
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         try {
             simpleMailMessage.setFrom(From_Mail);

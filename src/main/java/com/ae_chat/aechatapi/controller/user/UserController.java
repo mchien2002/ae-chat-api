@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.ae_chat.aechatapi.helper.IncredibleResponse;
 import com.ae_chat.aechatapi.route.RouteConstant;
 import com.ae_chat.aechatapi.service.user.UserService;
 import com.ae_chat.aechatapi.storage.UserStorage;
 
-@Controller
+@RestController
 @CrossOrigin(origins = "*")
 public class UserController {
     @Autowired
@@ -33,7 +35,6 @@ public class UserController {
                     .body(new IncredibleResponse(false, e.toString(), e, null));
         }
     }
-
 
     // TEST WEB SOCKET
 
