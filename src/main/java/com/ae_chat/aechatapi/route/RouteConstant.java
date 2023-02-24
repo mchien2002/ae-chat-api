@@ -5,7 +5,7 @@ public class RouteConstant {
     static public final String TOPIC = "/topic";
     static public final String APP = "/app";
     static public final String WEB_SOCKET_CONNECTION = "/websocket-connection";
-    static public final String CHAT_SOCKET = "/chat";
+    static public final String CONNECT_SOCKET_ENDPOINT = "/chat";
 
     // API
     static public final String MESSAGE = "/message";
@@ -18,4 +18,6 @@ public class RouteConstant {
     static public final String CREATE_GROUP = "/create_group";
     static public final String USER_PROFILE = "/user_profile";
     static public final String GROUP_PROFILE = "/group";
+    static public final String IMAGE_URL = "/image";
+    
 }

@@ -9,5 +9,5 @@ public interface UserService {
     void registerNewUser(User user);
     void updateUserProfile(User user);
     void deleteUserByPhone(String phone);
-    User findUserByID(Long id);
+    User findUserByID(String id);
 }

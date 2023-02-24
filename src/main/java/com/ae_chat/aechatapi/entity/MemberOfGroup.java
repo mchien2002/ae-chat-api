@@ -15,9 +15,9 @@ import lombok.Setter;
 public class MemberOfGroup implements Serializable {
     @Id
     @Column(name = "group_id")
-    private Long groupID;
+    private String groupID;
 
     @Id
     @Column(name = "user_id")
-    private Long userId;
+    private String userId;
 }

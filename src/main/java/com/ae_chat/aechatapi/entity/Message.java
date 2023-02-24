@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.ae_chat.aechatapi.entity.enum_model.MessageStatus;
 import com.ae_chat.aechatapi.entity.enum_model.MessageType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -17,9 +19,10 @@ import lombok.*;
 @Setter
 public class Message {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
     @Column(name = "message_id")
-    private Long id;
+    private String id;
 
     @Column(name = "type")
     private int type;
@@ -31,7 +34,7 @@ public class Message {
     private int groupType;
 
     @Column(name = "group_id")
-    private Long groupId;
+    private String groupId;
 
     @Column(name = "message")
     private String message;
@@ -46,7 +49,7 @@ public class Message {
     private String senderName;
 
     @Column(name = "sender_uin")
-    private Long senderUin;
+    private String senderUin;
 
     @Column(name = "sender_avatar")
     private String senderAvatar;
@@ -61,13 +64,13 @@ public class Message {
     private List<String> deletedUins;
 
     @Transient
-    private Object attachments;
+    private Object attachments; 
 
     @OneToOne(mappedBy = "lastMessage")
     @JsonBackReference
     private GroupConversation groupConversation;
 
-    public Message createFirstMessage(Long senderUin, int groupType){
+    public Message createFirstMessage(String senderUin, int groupType){
         var firstMessage = new Message();
         firstMessage.setCreatedAt(new Date());
         firstMessage.setType(MessageType.firstMessage.ordinal());

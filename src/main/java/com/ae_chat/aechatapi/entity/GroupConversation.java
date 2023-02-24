@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,16 +15,17 @@ import lombok.Setter;
 @Table(name = "group_conversation")
 @Getter
 @Setter
-public class GroupConversation {
+public class GroupConversation implements Comparable<GroupConversation> {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
     @Column(name = "group_id")
-    private Long groupId;
+    private String groupId;
 
     @Column(name = "name")
     private String name;
 
-    @Column(name = "group_type")
+    @Column(name = "group_type", nullable = false)
     private int groupType;
 
     @Column(name = "update_at")
@@ -31,14 +34,14 @@ public class GroupConversation {
     @Column(name = "avatar")
     private String avatar;
 
-    @Column(name = "owner_uin")
-    private Long ownerUin;
+    @Column(name = "owner_uin", nullable = false)
+    private String ownerUin;
 
-    @Column(name = "creator_uin")
-    private Long creatorUin;
+    @Column(name = "creator_uin", nullable = false)
+    private String creatorUin;
 
     @Transient
-    private List<Long> members;
+    private List<String> members;
 
     @Transient
     private List<?> removedMember;
@@ -46,4 +49,9 @@ public class GroupConversation {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "last_message", referencedColumnName = "message_id", nullable = true)
     private Message lastMessage;
+
+    @Override
+    public int compareTo(GroupConversation gr) {
+        return lastMessage.getCreatedAt().compareTo(gr.lastMessage.getCreatedAt());
+    }
 }
