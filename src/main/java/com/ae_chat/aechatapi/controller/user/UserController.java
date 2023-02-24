@@ -26,7 +26,7 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = RouteConstant.USER_PROFILE, method = RequestMethod.GET)
-    public ResponseEntity<?> getUserProfile(@RequestParam("id") Long id) {
+    public ResponseEntity<?> getUserProfile(@RequestParam("id") String id) {
         try {
             return ResponseEntity.status(HttpStatus.OK)
                     .body(new IncredibleResponse(true, null, null, userService.findUserByID(id)));

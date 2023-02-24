@@ -56,7 +56,7 @@ public class UserServiceIml implements UserService {
     }
 
     @Override
-    public User findUserByID(Long id) {
+    public User findUserByID(String id) {
         User user = userReponsitory.findUserById(id);
         return user;
     }

@@ -71,7 +71,7 @@ public class RegisterController {
             if (user == null) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
                         new IncredibleResponse(false, "Xác thực tài khoản không thành công", null,
-                                null));
+                        user));
             }
             user.setToken(jwtService.generateToken(user));
             return ResponseEntity.status(HttpStatus.OK).body(

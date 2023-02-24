@@ -36,7 +36,7 @@ public class GroupController {
 
     @PostMapping(value = RouteConstant.CREATE_GROUP)
     public ResponseEntity<?> createGroup(@RequestBody GroupConversation group,
-            @RequestParam("senderUin") Long senderUin) {
+            @RequestParam("senderUin") String senderUin) {
         try {
             Message firstMessage = new Message().createFirstMessage(senderUin, group.getGroupType());
             messageService.saveMessage(firstMessage);
@@ -54,7 +54,7 @@ public class GroupController {
     }
 
     @GetMapping(value = RouteConstant.GROUP_PROFILE)
-    public ResponseEntity<?> getGoupByID(@RequestParam("id") Long id) {
+    public ResponseEntity<?> getGoupByID(@RequestParam("id") String id) {
         try {
             return ResponseEntity.status(HttpStatus.OK)
                     .body(new IncredibleResponse(true, null, null, groupService.getGroupById(id)));
@@ -65,7 +65,7 @@ public class GroupController {
     }
 
     @MessageMapping(SocketRequestType.SOCKET_REQUEST_LIST_GROUP + "/to")
-    public void getListGroupMember(@DestinationVariable Long id) {
+    public void getListGroupMember(@DestinationVariable String id) {
         var listGroupOf = groupService.getListGroupOfMember(id);
         simpMessagingTemplate.convertAndSend(SocketRequestType.SOCKET_REQUEST_LIST_GROUP + id.toString(), listGroupOf);
     }

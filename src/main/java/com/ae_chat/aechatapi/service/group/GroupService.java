@@ -6,6 +6,6 @@ import com.ae_chat.aechatapi.entity.GroupConversation;
 
 public interface GroupService {
     void createGroup(GroupConversation group);
-    GroupConversation getGroupById(Long id);
-    List<GroupConversation> getListGroupOfMember(Long userId);
+    GroupConversation getGroupById(String id);
+    List<GroupConversation> getListGroupOfMember(String userId);
 }

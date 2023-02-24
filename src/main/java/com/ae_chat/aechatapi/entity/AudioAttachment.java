@@ -2,6 +2,8 @@ package com.ae_chat.aechatapi.entity;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import lombok.*;
 
 @Entity
@@ -11,10 +13,9 @@ import lombok.*;
 public class AudioAttachment {
     @Id
     @Column(name = "message_id")
-    private Long id;
-
-    @Column(name = "url", nullable = false, length = 1000)
-    private String url;
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    private String id;
 
     @Column(name = "local_url")
     private String localUrl;

@@ -10,8 +10,8 @@ import org.springframework.data.repository.query.Param;
 
 import com.ae_chat.aechatapi.entity.MemberOfGroup;
 
-public interface MemberOfGroupRepository extends JpaRepository<MemberOfGroup, Long> {
+public interface MemberOfGroupRepository extends JpaRepository<MemberOfGroup, String> {
     @Transactional
     @Query(value = "SELECT user_id FROM member_of_group WHERE group_id = :groupId", nativeQuery = true)
-    List<Long> getMemberByGroupId(@Param("groupId") Long groupId);
+    List<String> getMemberByGroupId(@Param("groupId") String groupId);
 }

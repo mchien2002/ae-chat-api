@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ae_chat.aechatapi.entity.User;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, String> {
     User findByPhone(String phone);
     User findByEmail(String email);
     @Transactional
@@ -24,5 +24,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Transactional
     @Query(value = "SELECT * FROM users WHERE user_id = :id", nativeQuery = true)    
-    User findUserById(@Param("id") Long id);
+    User findUserById(@Param("id") String id);
 }

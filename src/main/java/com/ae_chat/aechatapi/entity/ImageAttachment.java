@@ -11,7 +11,7 @@ import lombok.*;
 public class ImageAttachment {
     @Id
     @Column(name = "message_id")
-    private Long id;
+    private String id;
 
     @Column(name = "sub_index")
     private int subIndex;

@@ -48,7 +48,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public void saveImage(MultipartFile file, Long messageId) throws FileNotFoundException, IOException {
+    public void saveImage(MultipartFile file, String messageId) throws FileNotFoundException, IOException {
         InputStream inputStream = file.getInputStream();
         BufferedImage image = ImageIO.read(inputStream);
         ImageAttachment img = new ImageAttachment();
@@ -65,8 +65,8 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public byte[] downloadImage(String fileName) {
-        ImageAttachment dbImgData = imageAttRepository.findByUrl(fileName);
+    public byte[] downloadImage(String imgId) {
+        ImageAttachment dbImgData = imageAttRepository.findById(imgId).get();
         byte[] imageByte = FileUtils.decompressImage(dbImgData.getImageData());
         return imageByte;
     }
@@ -74,15 +74,16 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public void saveAudio(MultipartFile file) throws FileNotFoundException, IOException, UnsupportedAudioFileException {
         AudioAttachment audio = new AudioAttachment();
-        audio.setUrl(StringUtils.cleanPath(file.getOriginalFilename()));
         audio.setAudioData(FileUtils.compressImage(file.getBytes()));
-        audio.setDuration(FileUtils.getDuration(file));
+        // audio.setDuration(FileUtils.getDuration(file));
+        audioAttRepository.save(audio);
     }
 
     @Override
     public byte[] downloadAudio(String audioName) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'downloadAudio'");
+        AudioAttachment dbAudio = audioAttRepository.findById(audioName).get();
+        byte[] audioByte = FileUtils.decompressImage(dbAudio.getAudioData());
+        return audioByte;
     }
 
 }

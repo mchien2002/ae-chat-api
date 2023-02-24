@@ -21,20 +21,20 @@ public class GroupServiceIml implements GroupService {
     @Override
     public void createGroup(GroupConversation group) {
         groupReponsitory.saveAndFlush(group);
-        for (Long item : group.getMembers()) {
+        for (String item : group.getMembers()) {
             groupReponsitory.addMemberToGroup(group.getGroupId(), item);
         }
     }
 
     @Override
-    public GroupConversation getGroupById(Long id) {
+    public GroupConversation getGroupById(String id) {
         GroupConversation group = groupReponsitory.findById(id).get();
         group.setMembers(memberOfGroupRepository.getMemberByGroupId(group.getGroupId()));
         return group;
     }
 
     @Override
-    public List<GroupConversation> getListGroupOfMember(Long userId) {
+    public List<GroupConversation> getListGroupOfMember(String userId) {
         var listGroupOfMemner = groupReponsitory.getListGroupOfMember(userId);
         Collections.sort(listGroupOfMemner, Collections.reverseOrder());
         return listGroupOfMemner;

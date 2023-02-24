@@ -60,12 +60,13 @@ public class RegisterServiceIml implements RegisterService {
     public void genrateOTPAndSendOnEmail(String email) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         try {
+            String otp = FormatString.getRandomNumberOtp();
             simpleMailMessage.setFrom(From_Mail);
             simpleMailMessage.setTo(email);
             simpleMailMessage.setSubject("AppChat - Verify your email");
-            simpleMailMessage.setText("Mã OTP của bạn là: " + FormatString.getRandomNumberOtp() + ". Xin hãy xác minh");
+            simpleMailMessage.setText("Mã OTP của bạn là: " + otp + ". Xin hãy xác minh");
             javaMailSender.send(simpleMailMessage);
-            User newUser = new User().setFirstRegisterByMail(email, FormatString.getRandomNumberOtp());
+            User newUser = new User().setFirstRegisterByMail(email, otp);
             saveByEmail(newUser);
         } catch (MailException e) {
             throw e;

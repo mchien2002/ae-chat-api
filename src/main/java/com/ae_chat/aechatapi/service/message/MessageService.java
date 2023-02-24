@@ -17,7 +17,7 @@ public interface MessageService {
 
     List<Message> getMessagesByGroupID(String groupID);
 
-    void saveImage(MultipartFile file, Long messageId) throws FileNotFoundException, IOException;
+    void saveImage(MultipartFile file, String messageId) throws FileNotFoundException, IOException;
 
     void saveAudio(MultipartFile file) throws FileNotFoundException, IOException, UnsupportedAudioFileException;
 
