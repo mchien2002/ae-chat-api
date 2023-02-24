@@ -6,18 +6,20 @@ import java.io.InputStream;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ae_chat.aechatapi.entity.AudioAttachment;
 import com.ae_chat.aechatapi.entity.ImageAttachment;
 import com.ae_chat.aechatapi.entity.Message;
 import com.ae_chat.aechatapi.repositories.AudioAttRepository;
 import com.ae_chat.aechatapi.repositories.ImageAttRepository;
 import com.ae_chat.aechatapi.repositories.MessageRepository;
-import com.ae_chat.aechatapi.util.ImageUtils;
+import com.ae_chat.aechatapi.util.FileUtils;
 
 import java.awt.image.BufferedImage;
 
@@ -46,16 +48,17 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public void saveImage(MultipartFile file) throws FileNotFoundException, IOException {
+    public void saveImage(MultipartFile file, Long messageId) throws FileNotFoundException, IOException {
         InputStream inputStream = file.getInputStream();
         BufferedImage image = ImageIO.read(inputStream);
         ImageAttachment img = new ImageAttachment();
 
+        img.setId(messageId);
         img.setType(file.getContentType());
         img.setHeight(image.getHeight());
         img.setWidth(image.getWidth());
         img.setUrl(StringUtils.cleanPath(file.getOriginalFilename()));
-        img.setImageData(ImageUtils.compressImage(file.getBytes()));
+        img.setImageData(FileUtils.compressImage(file.getBytes()));
 
         imageAttRepository.save(img);
 
@@ -64,8 +67,22 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public byte[] downloadImage(String fileName) {
         ImageAttachment dbImgData = imageAttRepository.findByUrl(fileName);
-        byte[] imageByte = ImageUtils.decompressImage(dbImgData.getImageData());
+        byte[] imageByte = FileUtils.decompressImage(dbImgData.getImageData());
         return imageByte;
+    }
+
+    @Override
+    public void saveAudio(MultipartFile file) throws FileNotFoundException, IOException, UnsupportedAudioFileException {
+        AudioAttachment audio = new AudioAttachment();
+        audio.setUrl(StringUtils.cleanPath(file.getOriginalFilename()));
+        audio.setAudioData(FileUtils.compressImage(file.getBytes()));
+        audio.setDuration(FileUtils.getDuration(file));
+    }
+
+    @Override
+    public byte[] downloadAudio(String audioName) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'downloadAudio'");
     }
 
 }

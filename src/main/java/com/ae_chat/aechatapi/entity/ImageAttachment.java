@@ -10,7 +10,6 @@ import lombok.*;
 @Setter
 public class ImageAttachment {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "message_id")
     private Long id;
 

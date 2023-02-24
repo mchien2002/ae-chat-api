@@ -1,10 +1,19 @@
 package com.ae_chat.aechatapi.util;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
-public class ImageUtils {
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
+import org.springframework.web.multipart.MultipartFile;
+
+public class FileUtils {
     public static byte[] compressImage(byte[] data) {
         Deflater deflater = new Deflater();
         deflater.setLevel(Deflater.BEST_COMPRESSION);
@@ -38,5 +47,16 @@ public class ImageUtils {
         } catch (Exception ignored) {
         }
         return outputStream.toByteArray();
+    }
+
+    public static int getDuration(MultipartFile file)
+            throws UnsupportedAudioFileException, IOException {
+        byte[] bytes = file.getBytes();
+        ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(bis);
+        AudioFormat format = audioInputStream.getFormat();
+        float frames = audioInputStream.getFrameLength();
+        double rate = format.getFrameRate();
+        return (int) (frames / rate);
     }
 }
