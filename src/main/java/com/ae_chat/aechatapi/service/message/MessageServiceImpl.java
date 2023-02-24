@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +73,8 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public void saveAudio(MultipartFile file) throws FileNotFoundException, IOException, UnsupportedAudioFileException {
+    public void saveAudio(MultipartFile file)
+            throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         AudioAttachment audio = new AudioAttachment();
         audio.setAudioData(FileUtils.compressImage(file.getBytes()));
         // audio.setDuration(FileUtils.getDuration(file));
@@ -85,5 +87,4 @@ public class MessageServiceImpl implements MessageService {
         byte[] audioByte = FileUtils.decompressImage(dbAudio.getAudioData());
         return audioByte;
     }
-
 }

@@ -48,13 +48,13 @@ public class FileUtils {
         return outputStream.toByteArray();
     }
 
-    // public static int getDuration(MultipartFile file) throws UnsupportedAudioFileException, IOException {
-    //     File fileFile = new File(file);
-    //     file.transferTo(fileFile);
-    //     AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(fileFile);
-    //     AudioFormat format = audioInputStream.getFormat();
-    //     String frames = audioInputStream.getFrameLength();
-    //     int durationInSeconds = (int) ((frames + 0.0) / format.getFrameRate());
-    //     return durationInSeconds;
-    // }
+    public static int getDuration(MultipartFile audioFile)
+            throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioFile.getInputStream());
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioInputStream);
+        int duration = (int) clip.getMicrosecondLength() / 1000000;
+        clip.close();
+        return duration;
+    }
 }

@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -19,7 +20,7 @@ public interface MessageService {
 
     void saveImage(MultipartFile file, String messageId) throws FileNotFoundException, IOException;
 
-    void saveAudio(MultipartFile file) throws FileNotFoundException, IOException, UnsupportedAudioFileException;
+    void saveAudio(MultipartFile file) throws UnsupportedAudioFileException, IOException, LineUnavailableException;
 
     byte[] downloadAudio(String audioName);
 
