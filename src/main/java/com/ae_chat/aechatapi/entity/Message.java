@@ -61,7 +61,7 @@ public class Message {
     private List<String> deletedUins;
 
     @Transient
-    private Object attachments;
+    private Object attachments; 
 
     @OneToOne(mappedBy = "lastMessage")
     @JsonBackReference

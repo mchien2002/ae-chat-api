@@ -69,4 +69,5 @@ public class GroupController {
         var listGroupOf = groupService.getListGroupOfMember(id);
         simpMessagingTemplate.convertAndSend(SocketRequestType.SOCKET_REQUEST_LIST_GROUP + id.toString(), listGroupOf);
     }
+
 }

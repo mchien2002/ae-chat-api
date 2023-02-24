@@ -22,7 +22,7 @@ public class GroupConversation implements Comparable<GroupConversation> {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "group_type")
+    @Column(name = "group_type", nullable = false)
     private int groupType;
 
     @Column(name = "update_at")
@@ -31,10 +31,10 @@ public class GroupConversation implements Comparable<GroupConversation> {
     @Column(name = "avatar")
     private String avatar;
 
-    @Column(name = "owner_uin")
+    @Column(name = "owner_uin", nullable = false)
     private Long ownerUin;
 
-    @Column(name = "creator_uin")
+    @Column(name = "creator_uin", nullable = false)
     private Long creatorUin;
 
     @Transient

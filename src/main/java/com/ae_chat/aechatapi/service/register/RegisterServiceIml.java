@@ -1,6 +1,5 @@
 package com.ae_chat.aechatapi.service.register;
 
-
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,15 +58,14 @@ public class RegisterServiceIml implements RegisterService {
 
     @Override
     public void genrateOTPAndSendOnEmail(String email) {
-        int otp = (int) (Math.random() * 900000) + 100000;
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         try {
             simpleMailMessage.setFrom(From_Mail);
             simpleMailMessage.setTo(email);
             simpleMailMessage.setSubject("AppChat - Verify your email");
-            simpleMailMessage.setText("Mã OTP của bạn là: " + Integer.toString(otp) + ". Xin hãy xác minh");
+            simpleMailMessage.setText("Mã OTP của bạn là: " + FormatString.getRandomNumberOtp() + ". Xin hãy xác minh");
             javaMailSender.send(simpleMailMessage);
-            User newUser = new User().setFirstRegisterByMail(email, Integer.toString(otp));
+            User newUser = new User().setFirstRegisterByMail(email, FormatString.getRandomNumberOtp());
             saveByEmail(newUser);
         } catch (MailException e) {
             throw e;
