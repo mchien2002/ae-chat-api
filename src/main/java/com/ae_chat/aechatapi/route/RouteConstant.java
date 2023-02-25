@@ -19,5 +19,6 @@ public class RouteConstant {
     static public final String USER_PROFILE = "/user_profile";
     static public final String GROUP_PROFILE = "/group";
     static public final String IMAGE_URL = "/image";
+    static public final String AUDIO_URL = "/audio";
     
 }

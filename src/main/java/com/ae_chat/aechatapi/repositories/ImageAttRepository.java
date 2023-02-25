@@ -4,6 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.ae_chat.aechatapi.entity.ImageAttachment;
 
-public interface ImageAttRepository extends JpaRepository<ImageAttachment, String>{
-    ImageAttachment findByUrl(String fileName);
+public interface ImageAttRepository extends JpaRepository<ImageAttachment, String> {
 }

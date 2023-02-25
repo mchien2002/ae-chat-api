@@ -7,18 +7,15 @@ import org.hibernate.annotations.GenericGenerator;
 import lombok.*;
 
 @Entity
-@Table(name = "image_attachment")
+@Table(name = "video_attachment")
 @Getter
 @Setter
-public class ImageAttachment {
+public class VideoAttachment {
     @Id
     @Column(name = "url")
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String url;
-
-    @Column(name = "sub_index")
-    private int subIndex;
 
     @Column(name = "width")
     private int width;
@@ -27,12 +24,13 @@ public class ImageAttachment {
     private int height;
 
     @Lob
-    @Column(name = "image_data", length = 1000)
-    private byte[] imageData;
+    @Column(name = "video_data", length = 1000)
+    private byte[] videoData;
 
     @Column(name = "type")
     private String type;
-    
-    @Column(name = "message_id")
-    private String messageId;
+
+    @Column(name = "duration")
+    private int duration;
+
 }

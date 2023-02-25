@@ -12,16 +12,22 @@ import lombok.*;
 @Setter
 public class AudioAttachment {
     @Id
-    @Column(name = "message_id")
+    @Column(name = "url")
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
-    private String id;
+    private String url;
 
     @Column(name = "local_url")
     private String localUrl;
 
     @Column(name = "duration")
     private int duration;
+
+    @Column(name = "message_id")
+    private String messageId;
+
+    @Column(name = "type")
+    private String type;
 
     @Lob
     @Column(name = "audio_data", nullable = false, length = 1000)

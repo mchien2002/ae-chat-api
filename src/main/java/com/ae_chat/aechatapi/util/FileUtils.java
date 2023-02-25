@@ -1,13 +1,13 @@
 package com.ae_chat.aechatapi.util;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
+import java.awt.image.BufferedImage;
 
+import javax.imageio.ImageIO;
 import javax.sound.sampled.*;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -56,5 +56,17 @@ public class FileUtils {
         int duration = (int) clip.getMicrosecondLength() / 1000000;
         clip.close();
         return duration;
+    }
+
+    public static int getHeightFile(MultipartFile file) throws IOException {
+        InputStream inputStream = file.getInputStream();
+        BufferedImage image = ImageIO.read(inputStream);
+        return image.getHeight();
+    }
+
+    public static int getWidthFile(MultipartFile file) throws IOException {
+        InputStream inputStream = file.getInputStream();
+        BufferedImage image = ImageIO.read(inputStream);
+        return image.getWidth();
     }
 }
