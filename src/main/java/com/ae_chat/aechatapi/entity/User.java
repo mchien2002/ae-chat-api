@@ -7,6 +7,7 @@ import javax.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.ae_chat.aechatapi.util.FormatString;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "users")
@@ -37,7 +38,8 @@ public class User {
 
     @Column(name = "created_at")
     private Date createdAt;
-
+    
+    @JsonIgnore
     @Column(name = "otp")
     private String otp;
 

@@ -63,10 +63,10 @@ public class GroupController {
         }
     }
 
-    @MessageMapping(SocketRequestType.SOCKET_REQUEST_LIST_GROUP + "/to")
-    public void getListGroupMember(@DestinationVariable String id) {
-        var listGroupOf = groupService.getListGroupOfMember(id);
-        simpMessagingTemplate.convertAndSend(SocketRequestType.SOCKET_REQUEST_LIST_GROUP + id.toString(), listGroupOf);
+    @MessageMapping(SocketRequestType.SOCKET_REQUEST_LIST_GROUP + "/userId")
+    public void getListGroupMember(@DestinationVariable String userId) {
+        var listGroupOf = groupService.getListGroupOfMember(userId);
+        simpMessagingTemplate.convertAndSend(SocketRequestType.SOCKET_REQUEST_LIST_GROUP + userId, listGroupOf);
     }
 
 }

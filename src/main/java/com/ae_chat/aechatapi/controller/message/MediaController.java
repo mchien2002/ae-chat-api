@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ae_chat.aechatapi.helper.IncredibleResponse;
 import com.ae_chat.aechatapi.route.RouteConstant;
-import com.ae_chat.aechatapi.service.message.attachment.AttachmentService;
+import com.ae_chat.aechatapi.service.message.media.MediaService;
 
 @RestController
-public class AttachmentController {
+public class MediaController {
     @Autowired
-    private AttachmentService attachmentService;
+    private MediaService attachmentService;
 
     @GetMapping(RouteConstant.IMAGE_URL + "/{fileImg}")
     public ResponseEntity<?> downloadImage(@PathVariable String fileImg) {
@@ -33,6 +33,17 @@ public class AttachmentController {
         try {
             byte[] audioData = attachmentService.downloadAudio(fileAudio);
             return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("audio/mp3")).body(audioData);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new IncredibleResponse(false, e.toString(), e, null));
+        }
+    }
+
+    @GetMapping("video/{videoName}")
+    public ResponseEntity<?> downloadVideo(@PathVariable String videoName) {
+        try {
+            byte[] videoData = attachmentService.downloadVideo(videoName);
+            return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("video/mp4")).body(videoData);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new IncredibleResponse(false, e.toString(), e, null));

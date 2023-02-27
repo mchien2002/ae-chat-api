@@ -73,11 +73,11 @@ public class Message {
     public Message createFirstMessage(String senderUin, int groupType){
         var firstMessage = new Message();
         firstMessage.setCreatedAt(new Date());
-        firstMessage.setType(MessageType.firstMessage.ordinal());
+        firstMessage.setType(MessageType.FIRST_MESSAGE.ordinal());
         firstMessage.setMessage("");
         firstMessage.setGroupType(groupType);
         firstMessage.setSenderUin(senderUin);
-        firstMessage.setStatus(MessageStatus.sent.ordinal());
+        firstMessage.setStatus(MessageStatus.SENT.ordinal());
         return firstMessage;
     }
 }

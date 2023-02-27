@@ -1,20 +1,20 @@
 package com.ae_chat.aechatapi.entity.enum_model;
 
 public enum MessageType {
-    text, 
-    call,
-    image,
-    audio,
-    video,
-    firstMessage,
-    groupUpdate,
-    leaveGroup,
-    rely,
-    forward,
-    sticker,
-    file,
-    screenshot,
-    location,
-    liveLocation,
-    groupCall
+    TEXT, 
+    CALL,
+    IMAGE,
+    AUDIO,
+    VIDEO,
+    FIRST_MESSAGE,
+    GROUP_UPDATE,
+    LEAVE_GROUP,
+    REPLY,
+    FORWARD,
+    STICKER,
+    FILE,
+    SCREEN_SHOT,
+    LOCATION,
+    LIVE_LOCATION,
+    GROUP_CALL
 }

@@ -4,18 +4,23 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.*;
 
 @Entity
-@Table(name = "video_attachment")
+@Table(name = "images")
 @Getter
 @Setter
-public class VideoAttachment {
+public class Image {
     @Id
     @Column(name = "url")
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String url;
+
+    @Column(name = "sub_index")
+    private int subIndex;
 
     @Column(name = "width")
     private int width;
@@ -24,13 +29,13 @@ public class VideoAttachment {
     private int height;
 
     @Lob
-    @Column(name = "video_data", length = 1000)
-    private byte[] videoData;
+    @JsonIgnore
+    @Column(name = "image_data", length = 1000)
+    private byte[] imageData;
 
     @Column(name = "type")
     private String type;
-
-    @Column(name = "duration")
-    private int duration;
-
+    
+    @Column(name = "message_id")
+    private String messageId;
 }

@@ -4,13 +4,15 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.*;
 
 @Entity
-@Table(name = "audio_attachment")
+@Table(name = "audioes")
 @Getter
 @Setter
-public class AudioAttachment {
+public class Audio {
     @Id
     @Column(name = "url")
     @GeneratedValue(generator = "system-uuid")
@@ -30,6 +32,7 @@ public class AudioAttachment {
     private String type;
 
     @Lob
+    @JsonIgnore
     @Column(name = "audio_data", nullable = false, length = 1000)
     private byte[] audioData;
 

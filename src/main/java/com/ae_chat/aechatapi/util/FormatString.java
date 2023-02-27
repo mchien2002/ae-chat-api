@@ -3,7 +3,7 @@ package com.ae_chat.aechatapi.util;
 import java.util.Random;
 
 public class FormatString {
-    static public String customPhoneVNRegion(String phone) {
+    public static String customPhoneVNRegion(String phone) {
         String phoneRegister = phone;
         if (phone == null) {
             return null;
@@ -14,7 +14,7 @@ public class FormatString {
         return phoneRegister;
     }
 
-    static public String getRandomNumberOtp() {
+    public static String getRandomNumberOtp() {
         // It will generate 6 digit random Number.
         // from 0 to 999999
         Random rnd = new Random();

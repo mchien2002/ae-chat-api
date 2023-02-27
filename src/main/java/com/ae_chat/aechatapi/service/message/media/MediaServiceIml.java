@@ -1,4 +1,4 @@
-package com.ae_chat.aechatapi.service.message.attachment;
+package com.ae_chat.aechatapi.service.message.media;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,22 +10,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ae_chat.aechatapi.entity.AudioAttachment;
-import com.ae_chat.aechatapi.entity.ImageAttachment;
-import com.ae_chat.aechatapi.repositories.AudioAttRepository;
-import com.ae_chat.aechatapi.repositories.ImageAttRepository;
+import com.ae_chat.aechatapi.entity.Audio;
+import com.ae_chat.aechatapi.entity.Image;
+import com.ae_chat.aechatapi.entity.Video;
+import com.ae_chat.aechatapi.repositories.AudioRepository;
+import com.ae_chat.aechatapi.repositories.ImageRepository;
+import com.ae_chat.aechatapi.repositories.VideoRepository;
 import com.ae_chat.aechatapi.util.FileUtils;
+
 @Service
-public class AttachmentServiceIml implements AttachmentService {
+public class MediaServiceIml implements MediaService {
     @Autowired
-    private ImageAttRepository imageAttRepository;
+    private ImageRepository imageAttRepository;
     @Autowired
-    private AudioAttRepository audioAttRepository;
+    private AudioRepository audioAttRepository;
+    @Autowired
+    private VideoRepository videoAttRepository;
 
     @Override
     public void saveImage(MultipartFile file, String messageId) throws FileNotFoundException, IOException {
 
-        ImageAttachment img = new ImageAttachment();
+        Image img = new Image();
 
         img.setMessageId(messageId);
         img.setType(file.getContentType());
@@ -39,7 +44,7 @@ public class AttachmentServiceIml implements AttachmentService {
 
     @Override
     public byte[] downloadImage(String imgId) {
-        ImageAttachment dbImgData = imageAttRepository.findById(imgId).get();
+        Image dbImgData = imageAttRepository.findById(imgId).get();
         byte[] imageByte = FileUtils.decompressImage(dbImgData.getImageData());
         return imageByte;
     }
@@ -47,7 +52,7 @@ public class AttachmentServiceIml implements AttachmentService {
     @Override
     public void saveAudio(MultipartFile file, String messageId)
             throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        AudioAttachment audio = new AudioAttachment();
+        Audio audio = new Audio();
         audio.setAudioData(FileUtils.compressImage(file.getBytes()));
         audio.setMessageId(messageId);
         audio.setType(file.getContentType());
@@ -57,8 +62,28 @@ public class AttachmentServiceIml implements AttachmentService {
 
     @Override
     public byte[] downloadAudio(String audioName) {
-        AudioAttachment dbAudio = audioAttRepository.findById(audioName).get();
+        Audio dbAudio = audioAttRepository.findById(audioName).get();
         byte[] audioByte = FileUtils.decompressImage(dbAudio.getAudioData());
         return audioByte;
+    }
+
+    @Override
+    public void saveVideo(MultipartFile file)
+            throws FileNotFoundException, IOException, UnsupportedAudioFileException, LineUnavailableException {
+        Video video = new Video();
+        video.setVideoData(FileUtils.compressImage(file.getBytes()));
+        video.setType(file.getContentType());
+        // video.setDuration(FileUtils.getDuration(file));
+        // video.setHeight(FileUtils.getWidthMP4File(file));
+        // video.setWidth(FileUtils.getWidthMP4File(file));
+
+        videoAttRepository.save(video);
+    }
+
+    @Override
+    public byte[] downloadVideo(String fileName) {
+        Video dbVideo = videoAttRepository.findById(fileName).get();
+        byte[] videoByte = FileUtils.decompressImage(dbVideo.getVideoData());
+        return videoByte;
     }
 }
