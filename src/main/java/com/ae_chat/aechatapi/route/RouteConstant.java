@@ -2,23 +2,24 @@ package com.ae_chat.aechatapi.route;
 
 public class RouteConstant {
     // CONFIG WEBSOCKET
-    static public final String TOPIC = "/topic";
-    static public final String APP = "/app";
-    static public final String WEB_SOCKET_CONNECTION = "/websocket-connection";
-    static public final String CONNECT_SOCKET_ENDPOINT = "/chat";
+    public static final String TOPIC = "/topic";
+    public static final String APP = "/app";
+    public static final String WEB_SOCKET_CONNECTION = "/websocket-connection";
+    public static final String CONNECT_SOCKET_ENDPOINT = "/chat";
 
     // API
-    static public final String MESSAGE = "/message";
-    static public final String RETURN_TOPIC = "/topic/return-to";
-    static public final String MOBILE_NUMBER = "/mobileNo";
-    static public final String REGISTER_MOBILE = "/register_by_mobileNo";
-    static public final String VERIFY_OTP_MOBILE = "/verifyOTP_mobileNo";
-    static public final String REGISTER_EMAIL = "/register_by_email";
-    static public final String VERIFY_OTP_EMAIL = "/verifyOTP_email";
-    static public final String CREATE_GROUP = "/create_group";
-    static public final String USER_PROFILE = "/user_profile";
-    static public final String GROUP_PROFILE = "/group";
-    static public final String IMAGE_URL = "/image";
-    static public final String AUDIO_URL = "/audio";
-    
+    public static final String MESSAGE = "/message";
+    public static final String RETURN_TOPIC = "/topic/return-to";
+    public static final String MOBILE_NUMBER = "/mobileNo";
+    public static final String REGISTER_MOBILE = "/register_by_mobileNo";
+    public static final String VERIFY_OTP_MOBILE = "/verifyOTP_mobileNo";
+    public static final String REGISTER_EMAIL = "/register_by_email";
+    public static final String VERIFY_OTP_EMAIL = "/verifyOTP_email";
+    public static final String CREATE_GROUP = "/create_group";
+    public static final String USER_PROFILE = "/user_profile";
+    public static final String GROUP_PROFILE = "/group_profile";
+    public static final String IMAGE_URL = "/image";
+    public static final String AUDIO_URL = "/audio";
+    public static final String VIDEO_URL = "/video";
+
 }

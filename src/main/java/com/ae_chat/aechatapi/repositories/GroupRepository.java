@@ -21,6 +21,6 @@ public interface GroupRepository extends JpaRepository<GroupConversation, String
     GroupConversation findGroupById(@Param("groupId") String groupId);
 
     @Transactional
-    @Query(value = "SELECT * FROM `aechat-db`.group_conversation JOIN `aechat-db`.member_of_group ON member_of_group.user_id = :userId WHERE  group_conversation.group_id = member_of_group.group_id", nativeQuery = true)
+    @Query(value = "SELECT gr_con.* FROM `aechat-db`.group_conversation gr_con JOIN `aechat-db`.messages mess ON gr_con.last_message = mess.message_id JOIN `aechat-db`.member_of_group mem ON mem.user_id = :userId WHERE gr_con.group_id = mem.group_id ORDER BY mess.created_at ASC", nativeQuery = true)
     List<GroupConversation> getListGroupOfMember(@Param("userId") String userId);
 }

@@ -39,7 +39,7 @@ public class MediaController {
         }
     }
 
-    @GetMapping("video/{videoName}")
+    @GetMapping(RouteConstant.VIDEO_URL + "/{videoName}")
     public ResponseEntity<?> downloadVideo(@PathVariable String videoName) {
         try {
             byte[] videoData = attachmentService.downloadVideo(videoName);

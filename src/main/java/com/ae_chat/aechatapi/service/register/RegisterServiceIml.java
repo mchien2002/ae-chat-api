@@ -1,5 +1,6 @@
 package com.ae_chat.aechatapi.service.register;
 
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
@@ -8,6 +9,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.ae_chat.aechatapi.entity.User;
+import com.ae_chat.aechatapi.entity.UserOnlineStatus;
+import com.ae_chat.aechatapi.entity.enum_model.UserStatus;
+import com.ae_chat.aechatapi.repositories.UserOnlineStatusRepository;
 import com.ae_chat.aechatapi.repositories.UserRepository;
 import com.ae_chat.aechatapi.util.FormatString;
 import com.twilio.Twilio;
@@ -21,6 +25,8 @@ import lombok.extern.slf4j.Slf4j;
 public class RegisterServiceIml implements RegisterService {
     @Autowired
     private UserRepository userReponsitory;
+    @Autowired
+    private UserOnlineStatusRepository userOnlineStatusRepository;
     @Autowired
     private JavaMailSender javaMailSender;
     static final String Account_Sid = "ACdfb0d069b551c3bb92541b4d7536ea92";
@@ -92,7 +98,12 @@ public class RegisterServiceIml implements RegisterService {
 
     public void saveByEmail(User user) {
         try {
-            userReponsitory.save(user);
+            userReponsitory.saveAndFlush(user);
+            UserOnlineStatus newUserStatus = new UserOnlineStatus();
+            newUserStatus.setUserId(user.getUserId());
+            newUserStatus.setStatus(UserStatus.OFFLINE.ordinal());
+            newUserStatus.setLastTimeOnline(new Date());
+            userOnlineStatusRepository.save(newUserStatus);
         } catch (Exception e) {
             log.error(e.toString());
             userReponsitory.updateOTPByMail(user.getOtp().toString(), user.getEmail());

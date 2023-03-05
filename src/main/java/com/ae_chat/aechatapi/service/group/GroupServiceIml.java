@@ -1,6 +1,5 @@
 package com.ae_chat.aechatapi.service.group;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ public class GroupServiceIml implements GroupService {
     @Override
     public List<GroupConversation> getListGroupOfMember(String userId) {
         var listGroupOfMemner = groupReponsitory.getListGroupOfMember(userId);
-        Collections.sort(listGroupOfMemner, Collections.reverseOrder());
+        // Collections.sort(listGroupOfMemner, Collections.reverseOrder());
         return listGroupOfMemner;
     }
 }

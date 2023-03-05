@@ -1,5 +1,7 @@
 package com.ae_chat.aechatapi.service.user;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,6 +61,12 @@ public class UserServiceIml implements UserService {
     public User findUserByID(String id) {
         User user = userReponsitory.findUserById(id);
         return user;
+    }
+
+    @Override
+    public void setUserStatus(int status, Date lastTimeOnline) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setUserStatus'");
     }
 
 }

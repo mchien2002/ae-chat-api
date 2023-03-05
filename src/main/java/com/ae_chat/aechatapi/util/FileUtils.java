@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
-import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.*;
@@ -48,25 +47,25 @@ public class FileUtils {
         return outputStream.toByteArray();
     }
 
-    public static int getDuration(MultipartFile audioFile)
-            throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioFile.getInputStream());
-        Clip clip = AudioSystem.getClip();
-        clip.open(audioInputStream);
-        int duration = (int) clip.getMicrosecondLength() / 1000000;
-        clip.close();
-        return duration;
-    }
+    // public static int getDuration(MultipartFile audioFile)
+    //         throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+    //     AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioFile.getInputStream());
+    //     Clip clip = AudioSystem.getClip();
+    //     clip.open(audioInputStream);
+    //     int duration = (int) clip.getMicrosecondLength() / 1000000;
+    //     clip.close();
+    //     return duration;
+    // }
 
-    public static int getHeightFile(MultipartFile file) throws IOException {
-        InputStream inputStream = file.getInputStream();
-        BufferedImage image = ImageIO.read(inputStream);
-        return image.getHeight();
-    }
+    // public static int getHeightFile(MultipartFile file) throws IOException {
+    //     InputStream inputStream = file.getInputStream();
+    //     BufferedImage image = ImageIO.read(inputStream);
+    //     return image.getHeight();
+    // }
 
-    public static int getWidthFile(MultipartFile file) throws IOException {
-        InputStream inputStream = file.getInputStream();
-        BufferedImage image = ImageIO.read(inputStream);
-        return image.getWidth();
-    }
+    // public static int getWidthFile(MultipartFile file) throws IOException {
+    //     InputStream inputStream = file.getInputStream();
+    //     BufferedImage image = ImageIO.read(inputStream);
+    //     return image.getWidth();
+    // }
 }

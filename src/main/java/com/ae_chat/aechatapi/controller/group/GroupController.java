@@ -20,7 +20,7 @@ import com.ae_chat.aechatapi.service.message.MessageService;
 import com.ae_chat.aechatapi.websocket.SocketRequestType;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -34,10 +34,9 @@ public class GroupController {
     private SimpMessagingTemplate simpMessagingTemplate;
 
     @PostMapping(value = RouteConstant.CREATE_GROUP)
-    public ResponseEntity<?> createGroup(@RequestBody GroupConversation group,
-            @RequestParam("senderUin") String senderUin) {
+    public ResponseEntity<?> createGroup(@RequestBody GroupConversation group) {
         try {
-            Message firstMessage = new Message().createFirstMessage(senderUin, group.getGroupType());
+            Message firstMessage = new Message().createFirstMessage(group.getCreatorUin(), group.getGroupType());
             messageService.saveMessage(firstMessage);
             group.setUpdateAt(new Date());
             group.setLastMessage(firstMessage);
@@ -52,8 +51,8 @@ public class GroupController {
         }
     }
 
-    @GetMapping(value = RouteConstant.GROUP_PROFILE)
-    public ResponseEntity<?> getGoupByID(@RequestParam("id") String id) {
+    @GetMapping(value = RouteConstant.GROUP_PROFILE + "/{id}")
+    public ResponseEntity<?> getGoupsByID(@PathVariable String id) {
         try {
             return ResponseEntity.status(HttpStatus.OK)
                     .body(new IncredibleResponse(true, null, null, groupService.getGroupById(id)));

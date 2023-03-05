@@ -2,7 +2,9 @@ package com.ae_chat.aechatapi.service.message.media;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
+import javax.imageio.ImageIO;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
@@ -14,6 +16,7 @@ import com.ae_chat.aechatapi.entity.Audio;
 import com.ae_chat.aechatapi.entity.Image;
 import com.ae_chat.aechatapi.entity.Video;
 import com.ae_chat.aechatapi.repositories.AudioRepository;
+import java.awt.image.BufferedImage;
 import com.ae_chat.aechatapi.repositories.ImageRepository;
 import com.ae_chat.aechatapi.repositories.VideoRepository;
 import com.ae_chat.aechatapi.util.FileUtils;
@@ -31,11 +34,12 @@ public class MediaServiceIml implements MediaService {
     public void saveImage(MultipartFile file, String messageId) throws FileNotFoundException, IOException {
 
         Image img = new Image();
-
+        InputStream inputStream = file.getInputStream();
+        BufferedImage image = ImageIO.read(inputStream);
         img.setMessageId(messageId);
         img.setType(file.getContentType());
-        img.setHeight(FileUtils.getHeightFile(file));
-        img.setWidth(FileUtils.getWidthFile(file));
+        img.setHeight(image.getHeight());
+        img.setWidth(image.getWidth());
         img.setImageData(FileUtils.compressImage(file.getBytes()));
 
         imageAttRepository.save(img);
