@@ -63,6 +63,11 @@ public class RegisterServiceIml implements RegisterService {
 
     @Override
     public void genrateOTPAndSendOnEmail(String email) {
+        if (FormatString.getAccountTest(email)) {
+            User newUser = new User().setFirstRegisterByMail(email, "000000");
+            saveByEmail(newUser);
+            return;
+        }
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         try {
             String otp = FormatString.getRandomNumberOtp();

@@ -38,4 +38,10 @@ public class GroupServiceIml implements GroupService {
         // Collections.sort(listGroupOfMemner, Collections.reverseOrder());
         return listGroupOfMemner;
     }
+
+    @Override
+    public GroupConversation getPublicGroupWithMember(List<String> listMember) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPublicGroupWithMember'");
+    }
 }

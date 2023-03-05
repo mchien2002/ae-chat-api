@@ -6,5 +6,5 @@ public interface RegisterService {
     Boolean genrateOTPAndSendOnMobile(String phone);
     User verifyOTP(String phone, String otp);
     void genrateOTPAndSendOnEmail(String email);
-    User verifyOTPMail(String email, String otp);
+    User verifyOTPMail(String email, String otp);    
 }

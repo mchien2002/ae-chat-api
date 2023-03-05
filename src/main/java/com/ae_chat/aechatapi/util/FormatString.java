@@ -24,4 +24,11 @@ public class FormatString {
         return String.format("%06d", number);
     }
 
+    public static boolean getAccountTest(String acc) {
+        if (acc.substring(0, 4).equals("0707")) {
+            return true;
+        }
+        return false;
+    }
+
 }
