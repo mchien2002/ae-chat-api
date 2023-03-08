@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ae_chat.aechatapi.entity.User;
-import com.ae_chat.aechatapi.helper.IncredibleResponse;
+import com.ae_chat.aechatapi.helper.MyResponse;
 import com.ae_chat.aechatapi.route.RouteConstant;
 import com.ae_chat.aechatapi.service.register.JwtService;
 import com.ae_chat.aechatapi.service.register.RegisterService;
@@ -28,11 +28,11 @@ public class RegisterController {
         try {
             registerService.genrateOTPAndSendOnMobile(phone);
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new IncredibleResponse(true, "Mã OTP đang được gửi", null, null));
+                    .body(new MyResponse(true, "Mã OTP đang được gửi", null, null));
         } catch (Exception e) {
             log.error(e.toString(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new IncredibleResponse(false, "Mã OTP chưa được gửi", e.toString(), null));
+                    .body(new MyResponse(false, "Mã OTP chưa được gửi", e.toString(), null));
         }
     }
 
@@ -41,16 +41,16 @@ public class RegisterController {
         try {
             if (registerService.verifyOTP(phone, otp) == null) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
-                        new IncredibleResponse(false, "Xác thực tài khoản không thành công", null,
+                        new MyResponse(false, "Xác thực tài khoản không thành công", null,
                                 registerService.verifyOTP(phone, otp)));
             }
             return ResponseEntity.status(HttpStatus.OK).body(
-                    new IncredibleResponse(true, "Xác thực tài khoản thành công", null,
+                    new MyResponse(true, "Xác thực tài khoản thành công", null,
                             registerService.verifyOTP(phone, otp)));
         } catch (Exception e) {
             log.error(e.toString(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new IncredibleResponse(false, e.toString(), e, null));
+                    .body(new MyResponse(false, e.toString(), e, null));
         }
     }
 
@@ -59,10 +59,10 @@ public class RegisterController {
         try {
             registerService.genrateOTPAndSendOnEmail(email);
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new IncredibleResponse(true, "Đã gửi mail xác nhận", null, null));
+                    .body(new MyResponse(true, "Đã gửi mail xác nhận", null, null));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new IncredibleResponse(false, e.toString(), e, null));
+                    .body(new MyResponse(false, e.toString(), e, null));
         }
     }
 
@@ -73,16 +73,16 @@ public class RegisterController {
             User user = registerService.verifyOTPMail(email, otp);
             if (user == null) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
-                        new IncredibleResponse(false, "Bạn đã nhập sai OTP", null,
+                        new MyResponse(false, "Bạn đã nhập sai OTP", null,
                                 user));
             }
             user.setToken(jwtService.generateToken(user));
             return ResponseEntity.status(HttpStatus.OK).body(
-                    new IncredibleResponse(true, "Xác thực tài khoản thành công", null, user));
+                    new MyResponse(true, "Xác thực tài khoản thành công", null, user));
         } catch (Exception e) {
             log.error(e.toString(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new IncredibleResponse(false, e.toString(), e, null));
+                    .body(new MyResponse(false, e.toString(), e, null));
         }
     }
 }

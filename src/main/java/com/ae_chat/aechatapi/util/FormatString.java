@@ -31,4 +31,7 @@ public class FormatString {
         return false;
     }
 
+    public static String filterSQLMiddle(String value){
+        return "%" + value + "%";
+    }
 }

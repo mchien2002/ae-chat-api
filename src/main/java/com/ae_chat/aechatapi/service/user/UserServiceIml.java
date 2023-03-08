@@ -1,72 +1,28 @@
 package com.ae_chat.aechatapi.service.user;
 
-import java.util.Date;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ae_chat.aechatapi.entity.User;
 import com.ae_chat.aechatapi.repositories.UserRepository;
+import com.ae_chat.aechatapi.util.FormatString;
 
 @Service
 public class UserServiceIml implements UserService {
 
     @Autowired
-    private UserRepository userReponsitory;
+    private UserRepository userRepository;
 
     @Override
-    public User findUserByPhone(String phone) {
-        return null;
-    }
-
-    @Override
-    public void updateStateUser(int state) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void updateOtpUser(String otp) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void registerNewUser(User user) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void updateUserProfile(User user) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void deleteUserByPhone(String phone) {
-        // TODO Auto-generated method stub
-
-    }
-
-    public UserRepository getUserReponsitory() {
-        return userReponsitory;
-    }
-
-    public void setUserReponsitory(UserRepository userReponsitory) {
-        this.userReponsitory = userReponsitory;
+    public List<User> searchUser(String value) {
+        return userRepository.findUserByKey(FormatString.filterSQLMiddle(value));
     }
 
     @Override
     public User findUserByID(String id) {
-        User user = userReponsitory.findUserById(id);
-        return user;
-    }
-
-    @Override
-    public void setUserStatus(int status, Date lastTimeOnline) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setUserStatus'");
+       return userRepository.findById(id).get();
     }
 
 }

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.ae_chat.aechatapi.entity.GroupConversation;
 import com.ae_chat.aechatapi.entity.Message;
-import com.ae_chat.aechatapi.helper.IncredibleResponse;
+import com.ae_chat.aechatapi.helper.MyResponse;
 import com.ae_chat.aechatapi.route.RouteConstant;
 import com.ae_chat.aechatapi.service.group.GroupService;
 import com.ae_chat.aechatapi.service.message.MessageService;
@@ -38,16 +38,16 @@ public class GroupController {
         try {
             Message firstMessage = new Message().createFirstMessage(group.getCreatorUin(), group.getGroupType());
             messageService.saveMessage(firstMessage);
-            group.setUpdateAt(new Date());
+            group.setCreatedAt(new Date());
             group.setLastMessage(firstMessage);
             groupService.createGroup(group);
             firstMessage.setGroupId(group.getGroupId());
             messageService.saveMessage(firstMessage);
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new IncredibleResponse(true, "Tạo group thành công", null, group));
+                    .body(new MyResponse(true, "Tạo group thành công", null, group));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new IncredibleResponse(false, e.toString(), e, null));
+                    .body(new MyResponse(false, e.toString(), e, null));
         }
     }
 
@@ -55,10 +55,10 @@ public class GroupController {
     public ResponseEntity<?> getGoupsByID(@PathVariable String id) {
         try {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new IncredibleResponse(true, null, null, groupService.getGroupById(id)));
+                    .body(new MyResponse(true, null, null, groupService.getGroupById(id)));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new IncredibleResponse(false, e.toString(), e, null));
+                    .body(new MyResponse(false, e.toString(), e, null));
         }
     }
 

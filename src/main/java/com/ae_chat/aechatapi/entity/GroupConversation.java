@@ -28,11 +28,26 @@ public class GroupConversation implements Comparable<GroupConversation> {
     @Column(name = "group_type", nullable = false)
     private int groupType;
 
-    @Column(name = "update_at")
-    private Date updateAt;
+    @Column(name = "isMute")
+    private boolean isMute;
+
+    @Column(name = "theme")
+    private int theme;
+
+    @Column(name = "emojiGroup")
+    private String emojiGroup;
+
+    @Column(name = "last_active_time")
+    private Date lastActiceTime;
+
+    @Column(name = "created_at")
+    private Date createdAt;
 
     @Column(name = "avatar")
     private String avatar;
+
+    @Column(name = "groupStatus")
+    private int groupStatus;
 
     @Column(name = "owner_uin", nullable = false)
     private String ownerUin;
@@ -45,6 +60,9 @@ public class GroupConversation implements Comparable<GroupConversation> {
 
     @Transient
     private List<?> removedMember;
+
+    @Transient
+    private List<?> mediaFiles;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "last_message", referencedColumnName = "message_id", nullable = true)

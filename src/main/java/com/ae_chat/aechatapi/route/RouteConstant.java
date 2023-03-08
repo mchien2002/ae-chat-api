@@ -21,5 +21,6 @@ public class RouteConstant {
     public static final String IMAGE_URL = "/image";
     public static final String AUDIO_URL = "/audio";
     public static final String VIDEO_URL = "/video";
+    public static final String SEARCH_USER = "/search_user";
 
 }

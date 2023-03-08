@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ae_chat.aechatapi.helper.IncredibleResponse;
+import com.ae_chat.aechatapi.helper.MyResponse;
 import com.ae_chat.aechatapi.route.RouteConstant;
 import com.ae_chat.aechatapi.service.message.media.MediaService;
 
@@ -24,7 +24,7 @@ public class MediaController {
             return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("image/png")).body(imageData);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new IncredibleResponse(false, e.toString(), e, null));
+                    .body(new MyResponse(false, e.toString(), e, null));
         }
     }
 
@@ -35,7 +35,7 @@ public class MediaController {
             return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("audio/mp3")).body(audioData);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new IncredibleResponse(false, e.toString(), e, null));
+                    .body(new MyResponse(false, e.toString(), e, null));
         }
     }
 
@@ -46,7 +46,7 @@ public class MediaController {
             return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("video/mp4")).body(videoData);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new IncredibleResponse(false, e.toString(), e, null));
+                    .body(new MyResponse(false, e.toString(), e, null));
         }
     }
 }
