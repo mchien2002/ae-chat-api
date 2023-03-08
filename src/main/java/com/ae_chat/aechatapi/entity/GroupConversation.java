@@ -15,7 +15,7 @@ import lombok.Setter;
 @Table(name = "group_conversation")
 @Getter
 @Setter
-public class GroupConversation implements Comparable<GroupConversation> {
+public class GroupConversation {
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
@@ -27,9 +27,6 @@ public class GroupConversation implements Comparable<GroupConversation> {
 
     @Column(name = "group_type", nullable = false)
     private int groupType;
-
-    @Column(name = "isMute")
-    private boolean isMute;
 
     @Column(name = "theme")
     private int theme;
@@ -68,8 +65,4 @@ public class GroupConversation implements Comparable<GroupConversation> {
     @JoinColumn(name = "last_message", referencedColumnName = "message_id", nullable = true)
     private Message lastMessage;
 
-    @Override
-    public int compareTo(GroupConversation gr) {
-        return lastMessage.getCreatedAt().compareTo(gr.lastMessage.getCreatedAt());
-    }
 }

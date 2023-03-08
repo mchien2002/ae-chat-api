@@ -25,4 +25,9 @@ public class UserServiceIml implements UserService {
        return userRepository.findById(id).get();
     }
 
+    @Override
+    public void updateProfile(User user) {
+        userRepository.save(user);
+    }
+
 }
