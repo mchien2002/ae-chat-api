@@ -5,7 +5,7 @@ public class RouteConstant {
     public static final String TOPIC = "/topic";
     public static final String APP = "/app";
     public static final String WEB_SOCKET_CONNECTION = "/websocket-connection";
-    public static final String CONNECT_SOCKET_ENDPOINT = "/chat";
+    public static final String CONNECT_SOCKET_ENDPOINT = "/socket_connection/ws";
 
     // API
     public static final String MESSAGE = "/message";
